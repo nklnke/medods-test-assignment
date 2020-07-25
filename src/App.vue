@@ -88,7 +88,66 @@
 
           <h3>Адрес</h3>
 
+          <div class="surname">
+            <label for="surname">Индекс</label>
+            <input name="surname" type="text" />
+          </div>
+
+          <div class="surname">
+            <label for="surname">Страна</label>
+            <input name="surname" type="text" />
+          </div>
+
+          <div class="surname">
+            <label for="surname">Область</label>
+            <input name="surname" type="text" />
+          </div>
+
+          <div class="surname">
+            <label for="surname">Город <span class="red">*</span></label>
+            <input name="surname" type="text" />
+          </div>
+
+          <div class="surname">
+            <label for="surname">Улица</label>
+            <input name="surname" type="text" />
+          </div>
+
+          <div class="surname">
+            <label for="surname">Дом</label>
+            <input name="surname" type="text" />
+          </div>
+
           <h3>Паспорт</h3>
+
+          <div class="doctor">
+            <label for="doctor">Тип документа</label>
+            <select>
+              <option selected="selected" value="1">Паспорт</option>
+              <option value="2">Свидетельство о рождении</option>
+              <option value="3">Вод. удостоверение</option>
+            </select>
+          </div>
+
+          <div class="surname">
+            <label for="surname">Серия</label>
+            <input name="surname" type="text" />
+          </div>
+
+          <div class="surname">
+            <label for="surname">Номер</label>
+            <input name="surname" type="text" />
+          </div>
+
+          <div class="surname">
+            <label for="surname">Кем выдан</label>
+            <input name="surname" type="text" />
+          </div>
+
+          <div class="surname">
+            <label for="surname">Дата выдачи <span class="red">*</span></label>
+            <input name="surname" type="text" />
+          </div>
 
           <button class="submit" type="submit">Добавить</button>
         </form>
@@ -196,6 +255,7 @@ main
 
 .submit
   padding: 12px 70px
+  margin-top: 30px
   font-size: 24px
   cursor: pointer
 
