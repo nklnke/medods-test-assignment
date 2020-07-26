@@ -63,13 +63,19 @@
 
           <div class="sex">
             <label for="sex">Пол</label>
-            <input checked="checked" name="sex" type="radio" value="male" /> Мужской
-            <input name="sex" type="radio" value="female" /> Женский
+            <div class=""> <!-- .flex-2 -->
+              <input checked="checked" name="sex" type="radio" value="male" /> Мужской
+              <input name="sex" type="radio" value="female" /> Женский
+            </div>
           </div>
 
           <div class="client-group">
             <label for="client-group">Группа клиентов <span class="red">*</span></label>
-            xxxxx
+            <div class=""> <!-- .flex-2 -->
+              <input name="VIP" type="checkbox" /> VIP
+              <input name="Проблемные" type="checkbox" /> Проблемные
+              <input name="ОМС" type="checkbox" /> ОМС
+            </div>
           </div>
 
           <div class="doctor">
@@ -88,40 +94,40 @@
 
           <h3>Адрес</h3>
 
-          <div class="surname">
-            <label for="surname">Индекс</label>
-            <input name="surname" type="text" />
+          <div class="index">
+            <label for="index">Индекс</label>
+            <input name="index" type="text" />
           </div>
 
-          <div class="surname">
-            <label for="surname">Страна</label>
-            <input name="surname" type="text" />
+          <div class="country">
+            <label for="country">Страна</label>
+            <input name="country" type="text" />
           </div>
 
-          <div class="surname">
-            <label for="surname">Область</label>
-            <input name="surname" type="text" />
+          <div class="region">
+            <label for="region">Область</label>
+            <input name="region" type="text" />
           </div>
 
-          <div class="surname">
-            <label for="surname">Город <span class="red">*</span></label>
-            <input name="surname" type="text" />
+          <div class="town">
+            <label for="town">Город <span class="red">*</span></label>
+            <input name="town" type="text" />
           </div>
 
-          <div class="surname">
-            <label for="surname">Улица</label>
-            <input name="surname" type="text" />
+          <div class="street">
+            <label for="street">Улица</label>
+            <input name="street" type="text" />
           </div>
 
-          <div class="surname">
-            <label for="surname">Дом</label>
-            <input name="surname" type="text" />
+          <div class="house">
+            <label for="house">Дом</label>
+            <input name="house" type="text" />
           </div>
 
           <h3>Паспорт</h3>
 
-          <div class="doctor">
-            <label for="doctor">Тип документа</label>
+          <div class="type-of-document">
+            <label for="type-of-document">Тип документа</label>
             <select>
               <option selected="selected" value="1">Паспорт</option>
               <option value="2">Свидетельство о рождении</option>
@@ -129,24 +135,24 @@
             </select>
           </div>
 
-          <div class="surname">
-            <label for="surname">Серия</label>
-            <input name="surname" type="text" />
+          <div class="document-series">
+            <label for="document-series">Серия</label>
+            <input name="document-series" type="text" />
           </div>
 
-          <div class="surname">
-            <label for="surname">Номер</label>
-            <input name="surname" type="text" />
+          <div class="document-number">
+            <label for="document-number">Номер</label>
+            <input name="document-number" type="text" />
           </div>
 
-          <div class="surname">
-            <label for="surname">Кем выдан</label>
-            <input name="surname" type="text" />
+          <div class="place-of-issue">
+            <label for="place-of-issue">Кем выдан</label>
+            <input name="place-of-issue" type="text" />
           </div>
 
-          <div class="surname">
-            <label for="surname">Дата выдачи <span class="red">*</span></label>
-            <input name="surname" type="text" />
+          <div class="date-of-issue">
+            <label for="date-of-issue">Дата выдачи <span class="red">*</span></label>
+            <input name="date-of-issue" type="text" />
           </div>
 
           <button class="submit" type="submit">Добавить</button>
@@ -251,7 +257,19 @@ main
   padding: 48px 110px
 
 .sex
-  margin: 20px 0 40px
+  margin: 10px 0 20px
+  
+  input
+    margin-left: 15px
+    margin-right: 2px
+
+.client-group
+  display: flex
+  align-items: center
+
+  input
+    margin-left: 15px
+    margin-right: 2px 
 
 .submit
   padding: 12px 70px
