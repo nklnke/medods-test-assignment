@@ -1,186 +1,30 @@
 <template>
   <div id="app">
     <div class="wrapper">
-      <header>
-        <ul class="menu">
-          <li>
-            <img src="./assets/images/logo.svg" />
-          </li>
-          <li>
-            <a class="nav__link" href="#">Главная</a>
-          </li>
-          <li>
-            <a class="nav__link" href="#">Список клиентов</a>
-          </li>
-          <li>
-            <a class="nav__link" href="#">Добавить клиента</a>
-          </li>
-        </ul>
-      </header>
-
+      <Header />
       <main>
-        <h1>Добавить клиента</h1>
-
-        <h5>
-          Поля, отмеченные <span class="red">*</span>, обязательны для
-          заполнения
-        </h5>
-
-        <form
-          class="add-client-form"
-          accept-charset="UTF-8"
-          action="action_page.php"
-          autocomplete="off"
-          method="GET"
-          target="_blank"
-        >
-          <h3>Общие данные</h3>
-
-          <div class="surname">
-            <label for="surname">Фамилия <span class="red">*</span></label>
-            <input name="surname" type="text" />
-          </div>
-
-          <div class="name">
-            <label for="name">Имя <span class="red">*</span></label>
-            <input name="name" type="text" />
-          </div>
-
-          <div class="patronymic">
-            <label for="patronymic">Отчество</label>
-            <input name="patronymic" type="text" />
-          </div>
-
-          <div class="birthday">
-            <label for="birthday">Дата рождения <span class="red">*</span></label>
-            <input name="birthday" type="text" placeholder="__.__.____" />
-          </div>
-
-          <div class="phone-number">
-            <label for="phone-number">Номер телефона</label>
-            <input name="phone-number" type="text" placeholder="+7 (___) ___ - ____" />
-          </div>
-
-          <div class="sex">
-            <label for="sex">Пол</label>
-            <div class=""> <!-- .flex-2 -->
-              <input checked="checked" name="sex" type="radio" value="male" /> Мужской
-              <input name="sex" type="radio" value="female" /> Женский
-            </div>
-          </div>
-
-          <div class="client-group">
-            <label for="client-group">Группа клиентов <span class="red">*</span></label>
-            <div class=""> <!-- .flex-2 -->
-              <input name="VIP" type="checkbox" /> VIP
-              <input name="Проблемные" type="checkbox" /> Проблемные
-              <input name="ОМС" type="checkbox" /> ОМС
-            </div>
-          </div>
-
-          <div class="doctor">
-            <label for="doctor">Лечащий врач</label>
-            <select>
-              <option selected="selected" value="1">Иванов</option>
-              <option value="2">Захаров</option>
-              <option value="3">Чернышева</option>
-            </select>
-          </div>
-
-          <div class="sms-checkbox">
-            <input name="sms-checkbox" type="checkbox" checked />
-            <label for="sms-checkbox">Не отправлять СМС</label>
-          </div>
-
-          <h3>Адрес</h3>
-
-          <div class="index">
-            <label for="index">Индекс</label>
-            <input name="index" type="text" />
-          </div>
-
-          <div class="country">
-            <label for="country">Страна</label>
-            <input name="country" type="text" />
-          </div>
-
-          <div class="region">
-            <label for="region">Область</label>
-            <input name="region" type="text" />
-          </div>
-
-          <div class="town">
-            <label for="town">Город <span class="red">*</span></label>
-            <input name="town" type="text" />
-          </div>
-
-          <div class="street">
-            <label for="street">Улица</label>
-            <input name="street" type="text" />
-          </div>
-
-          <div class="house">
-            <label for="house">Дом</label>
-            <input name="house" type="text" />
-          </div>
-
-          <h3>Паспорт</h3>
-
-          <div class="type-of-document">
-            <label for="type-of-document">Тип документа</label>
-            <select>
-              <option selected="selected" value="1">Паспорт</option>
-              <option value="2">Свидетельство о рождении</option>
-              <option value="3">Вод. удостоверение</option>
-            </select>
-          </div>
-
-          <div class="document-series">
-            <label for="document-series">Серия</label>
-            <input name="document-series" type="text" />
-          </div>
-
-          <div class="document-number">
-            <label for="document-number">Номер</label>
-            <input name="document-number" type="text" />
-          </div>
-
-          <div class="place-of-issue">
-            <label for="place-of-issue">Кем выдан</label>
-            <input name="place-of-issue" type="text" />
-          </div>
-
-          <div class="date-of-issue">
-            <label for="date-of-issue">Дата выдачи <span class="red">*</span></label>
-            <input name="date-of-issue" type="text" />
-          </div>
-
-          <button class="submit" type="submit">Добавить</button>
-        </form>
+        <InfoBlock />
+        <FormWrapper />
       </main>
-
-      <aside>
-        <h1>Sidebar</h1>
-
-        <ul>
-          <li>sidebar-item</li>
-          <li>sidebar-item</li>
-          <li>sidebar-item</li>
-          <li>sidebar-item</li>
-          <li>sidebar-item</li>
-          <li>sidebar-item</li>
-          <li>sidebar-item</li>
-        </ul>
-      </aside>
-
+      <Sidebar />
     </div>
   </div>
 </template>
 
 <script>
+import Header from "./components/Header.vue";
+import Sidebar from "./components/Sidebar.vue";
+import InfoBlock from "./components/InfoBlock.vue";
+import FormWrapper from "./components/FormWrapper.vue";
+
 export default {
   name: "App",
-  components: {},
+  components: {
+    Header,
+    Sidebar,
+    InfoBlock,
+    FormWrapper,
+  },
 };
 </script>
 
@@ -217,90 +61,17 @@ body
 
   background-color: white
 
-header
-  width: 100%
-  height: 80px
-  flex: 1 100%
-
-  background-color: #81B3FF
-
-.menu
-  list-style: none
-  display: flex
-  height: 100%
-  align-items: center
-
-  li
-    padding: 28px 20px
-    cursor: pointer
-
-    &:hover
-      background-color: #5196FF
-      a
-        color: #A4C7E6
-
-    &:first-child
-      margin-left: 50px
-
-      &:hover
-      background-color: transparent
-
-    a
-      font-size: 20px
-      text-decoration: none
-      color: white
-
 main
   order: 1
   flex: 3 0px
 
   padding: 48px 110px
 
-.sex
-  margin: 10px 0 20px
-  
-  input
-    margin-left: 15px
-    margin-right: 2px
-
-.client-group
-  display: flex
-  align-items: center
-
-  input
-    margin-left: 15px
-    margin-right: 2px 
-
-.submit
-  padding: 12px 70px
-  margin-top: 30px
-  font-size: 24px
-  cursor: pointer
-
-  background-color: #5196FF
-  color: white
-  border: none
-  border-radius: 5px
-
-  &:hover
-    background-color: #81B3FF
-
 aside
+  height: 100%
   order: 2
   flex: 1 auto
   padding: 50px 10px 15px 50px
 
   border-left: 1px solid lightgray
-
-  ul
-    list-style: none
-    margin-left: 0
-
-    li
-      margin-bottom: 15px
-      font-size: 24px
-
-      &:first-child
-        margin-top: 15px
-
 </style>
