@@ -23,8 +23,6 @@ export default {};
 
 <style lang="sass" scoped>
 header
-  width: 100%
-  height: 80px
   flex: 1 100%
 
   background-color: #81B3FF
@@ -32,7 +30,7 @@ header
 .menu
   list-style: none
   display: flex
-  height: 100%
+  flex-wrap: wrap
   align-items: center
 
   li
@@ -45,6 +43,8 @@ header
         color: #A4C7E6
 
     &:first-child
+      padding: 0
+      margin-right: 20px
       margin-left: 50px
 
       &:hover

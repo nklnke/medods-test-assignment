@@ -183,16 +183,16 @@ export default {
   margin: 10px 0 20px
 
   input
-    margin-left: 15px
-    margin-right: 2px
+    margin-left: 20px
+    margin-right: 5px
 
 .client-group
   display: flex
   align-items: center
 
   input
-    margin-left: 15px
-    margin-right: 2px
+    margin-left: 20px
+    margin-right: 5px
 
 .submit
   padding: 12px 70px
@@ -207,4 +207,8 @@ export default {
 
   &:hover
     background-color: #81B3FF
+
+  &:disabled
+    background-color: lightgray
+    cursor: not-allowed
 </style>

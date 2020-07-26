@@ -57,7 +57,7 @@ body
 .wrapper
   display: flex
   flex-flow: row wrap
-  width: 1400px
+  flex-basis: 1400px
 
   background-color: white
 
@@ -65,10 +65,9 @@ main
   order: 1
   flex: 3 0px
 
-  padding: 48px 110px
+  padding: 48px 50px
 
 aside
-  height: 100%
   order: 2
   flex: 1 auto
   padding: 50px 10px 15px 50px
