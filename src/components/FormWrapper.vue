@@ -6,27 +6,25 @@
     autocomplete="off"
     method="GET"
     target="_blank"
-    @submit.prevent="someAction()"
+    @submit.prevent="addUser()"
   >
     <h3>Общие данные</h3>
 
     <div class="surname">
       <label for="surname">Фамилия <span class="red">*</span></label>
-      <input name="surname" type="text" />
+      <input v-model="surname" @blur="$v.surname.$touch()" type="text" />
+      <div class="error" v-if="$v.surname.$error">
+        <template v-if="!$v.surname.alpha">
+          Фамилия обязательна для заполнения
+        </template>
+      </div>
     </div>
 
     <div class="name">
       <label for="name">Имя <span class="red">*</span></label>
-      <input id="name" v-model="name" @blur="$v.name.$touch()" type="text" />
+      <input v-model="name" @blur="$v.name.$touch()" type="text" />
       <div class="error" v-if="$v.name.$error">
-        <template v-if="!$v.name.maxLength">
-          Длина имени не должна превышать
-          {{ $v.name.$params.maxLength.max }} символов
-        </template>
-        <template v-else-if="!$v.name.alpha">
-          Имя должно содержать только буквы
-        </template>
-        <template v-else>
+        <template v-if="!$v.name.alpha">
           Имя обязательно для заполнения
         </template>
       </div>
@@ -34,21 +32,32 @@
 
     <div class="patronymic">
       <label for="patronymic">Отчество</label>
-      <input name="patronymic" type="text" />
+      <input type="text" />
     </div>
 
     <div class="birthday">
       <label for="birthday">Дата рождения <span class="red">*</span></label>
-      <input name="birthday" type="text" placeholder="__.__.____" />
+      <input v-model="birthday" @blur="$v.birthday.$touch()" type="text" placeholder="__.__.____" />
+      <div class="error" v-if="$v.birthday.$error">
+        <template v-if="!$v.birthday.alpha">
+          День рождения обязателен для заполнения
+        </template>
+      </div>
     </div>
 
     <div class="phone-number">
       <label for="phone-number">Номер телефона</label>
       <input
-        name="phone-number"
+        v-model="phoneNumber"
+        @blur="$v.phoneNumber.$touch()"
         type="text"
         placeholder="+7 (___) ___ - ____"
       />
+      <div class="error" v-if="$v.phoneNumber.$error">
+        <template v-if="!$v.phoneNumber.alpha">
+          Номер телефона обязателен для заполнения
+        </template>
+      </div>
     </div>
 
     <div class="sex">
@@ -105,7 +114,12 @@
 
     <div class="town">
       <label for="town">Город <span class="red">*</span></label>
-      <input name="town" type="text" />
+      <input v-model="town" @blur="$v.town.$touch()" type="text" />
+      <div class="error" v-if="$v.town.$error">
+        <template v-if="!$v.town.alpha">
+          Город обязателен для заполнения
+        </template>
+      </div>
     </div>
 
     <div class="street">
@@ -121,12 +135,17 @@
     <h3>Паспорт</h3>
 
     <div class="type-of-document">
-      <label for="type-of-document">Тип документа</label>
-      <select>
+      <label for="type-of-document">Тип документа <span class="red">*</span></label>
+      <select v-model="typeOfDocument" @blur="$v.typeOfDocument.$touch()">
         <option selected="selected" value="1">Паспорт</option>
         <option value="2">Свидетельство о рождении</option>
         <option value="3">Вод. удостоверение</option>
       </select>
+      <div class="error" v-if="$v.typeOfDocument.$error">
+        <template v-if="!$v.typeOfDocument.alpha">
+          Тип документа обязателен для заполнения
+        </template>
+      </div>
     </div>
 
     <div class="document-series">
@@ -146,7 +165,12 @@
 
     <div class="date-of-issue">
       <label for="date-of-issue">Дата выдачи <span class="red">*</span></label>
-      <input name="date-of-issue" type="text" />
+      <input v-model="dateOfIssue" @blur="$v.dateOfIssue.$touch()" type="text" />
+      <div class="error" v-if="$v.dateOfIssue.$error">
+        <template v-if="!$v.dateOfIssue.alpha">
+          Дата выдачи обязательна для заполнения
+        </template>
+      </div>
     </div>
 
     <button class="submit" type="submit" :disabled="$v.$invalid">
@@ -156,23 +180,53 @@
 </template>
 
 <script>
-import { required, maxLength } from "vuelidate/lib/validators";
+import { required } from "vuelidate/lib/validators";
 
 export default {
   data() {
     return {
-      name: null,
+      name: "",
+      surname: "",
+      birthday: "",
+      phoneNumber: "",
+      clientGroup: "",
+      doctor: "",
+      smsCheckbox: "",
+      town: "",
+      typeOfDocument: "",
+      dateOfIssue: ""
     };
   },
   validations: {
-    name: {
-      required,
-      maxLength: maxLength(10),
+    surname: {
+      required
     },
+    name: {
+      required
+    },
+    birthday: {
+      required
+    },
+    phoneNumber: {
+      required,
+      // between: between(11, 11)
+    },
+    clientGroup: {
+      // required
+    },
+    town: {
+      required
+    },
+    typeOfDocument: {
+      required
+    },
+    dateOfIssue: {
+      required
+    }
   },
   methods: {
-    someAction() {
-      alert("Форма отправлена");
+    addUser() {
+      alert("Пользователь добавлен");
     },
   },
 };
@@ -204,6 +258,8 @@ export default {
   color: white
   border: none
   border-radius: 5px
+
+  transition: .2s ease
 
   &:hover
     background-color: #81B3FF
