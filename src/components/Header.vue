@@ -36,11 +36,13 @@ header
   li
     padding: 28px 20px
     cursor: pointer
+    transition: .3s ease
 
     &:hover
       background-color: #5196FF
       a
         color: #A4C7E6
+        transition: .3s ease
 
     &:first-child
       padding: 0
