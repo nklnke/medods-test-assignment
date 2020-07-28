@@ -165,7 +165,9 @@
 
     <p class="submitStatus green" v-if="submitStatus === 'OK'">Клиент успешно добавлен</p>
     <p class="submitStatus red" v-if="submitStatus === 'ERROR'">Пожалуйста, правильно заполните все поля</p>
-    <p class="submitStatus blue" v-if="submitStatus === 'PENDING'">Добавление...</p>
+    <p class="submitStatus blue" v-if="submitStatus === 'PENDING'">
+      <img class="loading" src="./../assets/images/loading.gif"> Добавление...
+    </p>
   </form>
 </template>
 
@@ -220,11 +222,10 @@ export default {
       if (this.$v.$invalid) {
         this.submitStatus = "ERROR";
       } else {
-        console.log("Клиент добавлен");
         this.submitStatus = "PENDING";
         setTimeout(() => {
           this.submitStatus = "OK";
-        }, 500);
+        }, 1500);
       }
     },
   },
