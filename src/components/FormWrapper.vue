@@ -3,86 +3,73 @@
     class="add-client-form"
     accept-charset="UTF-8"
     action="action_page.php"
-    autocomplete="off"
     method="GET"
-    target="_blank"
-    @submit.prevent="addUser()"
-  >
+    @submit.prevent="submit()">
+
     <h3>Общие данные</h3>
 
-    <div class="surname">
-      <label for="surname">Фамилия <span class="red">*</span></label>
-      <input v-model="surname" @blur="$v.surname.$touch()" type="text" />
-      <div class="error" v-if="$v.surname.$error">
-        <template v-if="!$v.surname.alpha">
-          Фамилия обязательна для заполнения
-        </template>
-      </div>
+    <!-- surname check -->
+    <div class="form-group surname" :class="{ 'form-group__error': $v.name.$error }">
+      <label class="form-group__label" for="surname">Фамилия <span class="red">*</span></label>
+      <input class="form-group__input" v-model.trim="$v.surname.$model" type="text" />
+    </div>
+    <div class="error" v-if="!$v.surname.required">Фамилия обязательна</div>
+
+    <!-- name check -->
+    <div class="form-group name" :class="{ 'form-group__error': $v.name.$error }">
+      <label class="form-group__label" for="name">Имя <span class="red">*</span></label>
+      <input class="form-group__input" v-model.trim="$v.name.$model" type="text" />
+    </div>
+    <div class="error" v-if="!$v.name.required">Имя обязательно</div>
+
+    <!-- patronymic WITHOUT check-->
+    <div class="form-group patronymic">
+      <label class="form-group__label" for="patronymic">Отчество</label>
+      <input class="form-group__input" type="text" />
     </div>
 
-    <div class="name">
-      <label for="name">Имя <span class="red">*</span></label>
-      <input v-model="name" @blur="$v.name.$touch()" type="text" />
-      <div class="error" v-if="$v.name.$error">
-        <template v-if="!$v.name.alpha">
-          Имя обязательно для заполнения
-        </template>
-      </div>
+    <!-- birthday check -->
+    <div class="form-group birthday" :class="{ 'form-group__error': $v.birthday.$error }">
+      <label class="form-group__label" for="birthday">Дата рождения <span class="red">*</span></label>
+      <input class="form-group__input" v-model.trim="$v.birthday.$model" type="text" placeholder="__.__.____" />
     </div>
+    <div class="error" v-if="!$v.birthday.required">Дата рождения обязательна</div>
 
-    <div class="patronymic">
-      <label for="patronymic">Отчество</label>
-      <input type="text" />
+    <!-- phone-number check -->
+    <div class="form-group phone-number" :class="{ 'form-group__error': $v.phoneNumber.$error }">
+      <label class="form-group__label" for="phoneNumber">Номер телефона</label>
+      <input class="form-group__input" v-model.trim="$v.phoneNumber.$model" type="text" placeholder="+7 (___) ___ - ____" />
     </div>
+    <div class="error" v-if="!$v.phoneNumber.required">Номер должен содержать 11 цифр</div>
 
-    <div class="birthday">
-      <label for="birthday">Дата рождения <span class="red">*</span></label>
-      <input v-model="birthday" @blur="$v.birthday.$touch()" type="text" placeholder="__.__.____" />
-      <div class="error" v-if="$v.birthday.$error">
-        <template v-if="!$v.birthday.alpha">
-          День рождения обязателен для заполнения
-        </template>
-      </div>
-    </div>
-
-    <div class="phone-number">
-      <label for="phone-number">Номер телефона</label>
-      <input
-        v-model="phoneNumber"
-        @blur="$v.phoneNumber.$touch()"
-        type="text"
-        placeholder="+7 (___) ___ - ____"
-      />
-      <div class="error" v-if="$v.phoneNumber.$error">
-        <template v-if="!$v.phoneNumber.alpha">
-          Номер телефона обязателен для заполнения
-        </template>
-      </div>
-    </div>
-
-    <div class="sex">
-      <label for="sex">Пол</label>
-      <div class="">
-        <!-- .flex-2 -->
+    <!-- sex WITHOUT check -->
+    <div class="form-group sex">
+      <label class="form-group__label" for="sex">Пол</label>
+      <div>
         <input checked="checked" name="sex" type="radio" value="male" /> Мужской
         <input name="sex" type="radio" value="female" /> Женский
       </div>
     </div>
 
-    <div class="client-group">
-      <label for="client-group"
-        >Группа клиентов <span class="red">*</span></label
-      >
+    <!-- client-group check -->
+    <div class="form-group client-group" :class="{ 'form-group__error': $v.clientGroup.$error }">
+      <label class="form-group__label" for="client-group">Группа клиентов <span class="red">*</span></label>
       <div class="">
-        <!-- .flex-2 -->
-        <input name="VIP" type="checkbox" /> VIP
-        <input name="Проблемные" type="checkbox" /> Проблемные
-        <input name="ОМС" type="checkbox" /> ОМС
+        <!-- TODO: разобраться с проверкой мультиселектора -->
+        <!-- !$v.clientGroup1.required -->
+        <!-- !$v.clientGroup2.required -->
+        <!-- !$v.clientGroup3.required -->
+        <!-- один из них должен сработать, тогда проверка пройдёт -->
+        <input name="VIP" type="checkbox" v-model="$v.clientGroup.$model" /> VIP
+        <input name="Проблемные" type="checkbox" v-model="$v.clientGroup.$model" /> Проблемные
+        <input name="ОМС" type="checkbox" v-model="$v.clientGroup.$model" /> ОМС
       </div>
     </div>
+    <div class="error" v-if="!$v.clientGroup.required">Обязательно для заполнения</div>
 
-    <div class="doctor">
-      <label for="doctor">Лечащий врач</label>
+    <!-- doctor WITHOUT check -->
+    <div class="form-group doctor">
+      <label class="form-group__label" for="doctor">Лечащий врач</label>
       <select>
         <option selected="selected" value="1">Иванов</option>
         <option value="2">Захаров</option>
@@ -90,111 +77,114 @@
       </select>
     </div>
 
-    <div class="sms-checkbox">
+    <!-- sms-check WITHOUT check -->
+    <div class="form-group sms-check">
       <input name="sms-checkbox" type="checkbox" checked />
-      <label for="sms-checkbox">Не отправлять СМС</label>
+      <!-- TODO: сделать отступ от галочки -->
+      <label class="form-group__label" for="sms-check">Не отправлять СМС</label>
     </div>
 
     <h3>Адрес</h3>
 
-    <div class="index">
-      <label for="index">Индекс</label>
-      <input name="index" type="text" />
+    <!-- index WITHOUT check-->
+    <div class="form-group index">
+      <label class="form-group__label" for="index">Индекс</label>
+      <input class="form-group__input" type="text" />
     </div>
 
-    <div class="country">
-      <label for="country">Страна</label>
-      <input name="country" type="text" />
+    <!-- country WITHOUT check-->
+    <div class="form-group country">
+      <label class="form-group__label" for="country">Страна</label>
+      <input class="form-group__input" type="text" />
     </div>
 
-    <div class="region">
-      <label for="region">Область</label>
-      <input name="region" type="text" />
+    <!-- region WITHOUT check-->
+    <div class="form-group region">
+      <label class="form-group__label" for="region">Область</label>
+      <input class="form-group__input" type="text" />
+    </div>
+  
+    <!-- town check -->
+    <div class="form-group town" :class="{ 'form-group__error': $v.town.$error }">
+      <label class="form-group__label" for="town">Город <span class="red">*</span></label>
+      <input class="form-group__input" v-model.trim="$v.town.$model" type="text" />
+    </div>
+    <div class="error" v-if="!$v.town.required">Город обязателен</div>
+
+    <!-- street WITHOUT check-->
+    <div class="form-group street">
+      <label class="form-group__label" for="street">Область</label>
+      <input class="form-group__input" type="text" />
     </div>
 
-    <div class="town">
-      <label for="town">Город <span class="red">*</span></label>
-      <input v-model="town" @blur="$v.town.$touch()" type="text" />
-      <div class="error" v-if="$v.town.$error">
-        <template v-if="!$v.town.alpha">
-          Город обязателен для заполнения
-        </template>
-      </div>
-    </div>
-
-    <div class="street">
-      <label for="street">Улица</label>
-      <input name="street" type="text" />
-    </div>
-
-    <div class="house">
-      <label for="house">Дом</label>
-      <input name="house" type="text" />
+    <!-- house WITHOUT check-->
+    <div class="form-group house">
+      <label class="form-group__label" for="house">Дом</label>
+      <input class="form-group__input" type="text" />
     </div>
 
     <h3>Паспорт</h3>
 
-    <div class="type-of-document">
-      <label for="type-of-document">Тип документа <span class="red">*</span></label>
-      <select v-model="typeOfDocument" @blur="$v.typeOfDocument.$touch()">
+    <!-- type-of-document check -->
+    <div class="form-group type-of-document" :class="{ 'form-group__error': $v.typeOfDocument.$error }">
+      <label class="form-group__label" for="typeOfDocument">Тип документа <span class="red">*</span></label>
+      <select v-model.trim="$v.typeOfDocument.$model">
         <option selected="selected" value="1">Паспорт</option>
         <option value="2">Свидетельство о рождении</option>
         <option value="3">Вод. удостоверение</option>
       </select>
-      <div class="error" v-if="$v.typeOfDocument.$error">
-        <template v-if="!$v.typeOfDocument.alpha">
-          Тип документа обязателен для заполнения
-        </template>
-      </div>
+    </div>
+    <div class="error" v-if="!$v.typeOfDocument.required">Типа документа обязателен</div>
+
+    <!-- document-series WITHOUT check-->
+    <div class="form-group document-series">
+      <label class="form-group__label" for="document-series">Серия</label>
+      <input class="form-group__input" type="text" />
     </div>
 
-    <div class="document-series">
-      <label for="document-series">Серия</label>
-      <input name="document-series" type="text" />
+    <!-- document-number WITHOUT check-->
+    <div class="form-group document-number">
+      <label class="form-group__label" for="document-number">Номер</label>
+      <input class="form-group__input" type="text" />
     </div>
 
-    <div class="document-number">
-      <label for="document-number">Номер</label>
-      <input name="document-number" type="text" />
+    <!-- place-of-issue WITHOUT check-->
+    <div class="form-group place-of-issue">
+      <label class="form-group__label" for="place-of-issue">Кем выдан</label>
+      <input class="form-group__input" type="text" />
     </div>
 
-    <div class="place-of-issue">
-      <label for="place-of-issue">Кем выдан</label>
-      <input name="place-of-issue" type="text" />
+    <!-- date-of-issue check -->
+    <div class="form-group date-of-issue" :class="{ 'form-group__error': $v.dateOfIssue.$error }">
+      <label class="form-group__label" for="date-of-issue">Дата выдачи <span class="red">*</span></label>
+      <input class="form-group__input" v-model.trim="$v.dateOfIssue.$model" type="text" placeholder="__.__.____" />
     </div>
+    <div class="error" v-if="!$v.dateOfIssue.required">Дата выдачи обязательна</div>
 
-    <div class="date-of-issue">
-      <label for="date-of-issue">Дата выдачи <span class="red">*</span></label>
-      <input v-model="dateOfIssue" @blur="$v.dateOfIssue.$touch()" type="text" />
-      <div class="error" v-if="$v.dateOfIssue.$error">
-        <template v-if="!$v.dateOfIssue.alpha">
-          Дата выдачи обязательна для заполнения
-        </template>
-      </div>
-    </div>
+    <button class="submit" type="submit" :disabled="submitStatus === 'PENDING'">Добавить</button>
 
-    <button class="submit" type="submit" :disabled="$v.$invalid">
-      Добавить
-    </button>
+    <p class="submitStatus green" v-if="submitStatus === 'OK'">Клиент успешно добавлен</p>
+    <p class="submitStatus red" v-if="submitStatus === 'ERROR'">Пожалуйста, правильно заполните все поля</p>
+    <p class="submitStatus blue" v-if="submitStatus === 'PENDING'">Добавление...</p>
   </form>
 </template>
 
 <script>
-import { required } from "vuelidate/lib/validators";
+import { required, minLength, maxLength } from "vuelidate/lib/validators";
 
 export default {
   data() {
     return {
-      name: "",
       surname: "",
+      name: "",
       birthday: "",
       phoneNumber: "",
       clientGroup: "",
       doctor: "",
-      smsCheckbox: "",
       town: "",
       typeOfDocument: "",
-      dateOfIssue: ""
+      dateOfIssue: "",
+      submitStatus: null
     };
   },
   validations: {
@@ -208,11 +198,11 @@ export default {
       required
     },
     phoneNumber: {
-      required,
-      // between: between(11, 11)
+      minLength: minLength(11),
+      maxLength: maxLength(11)
     },
     clientGroup: {
-      // required
+      required
     },
     town: {
       required
@@ -225,8 +215,17 @@ export default {
     }
   },
   methods: {
-    addUser() {
-      alert("Пользователь добавлен");
+    submit() {
+      this.$v.$touch();
+      if (this.$v.$invalid) {
+        this.submitStatus = "ERROR";
+      } else {
+        console.log("Клиент добавлен");
+        this.submitStatus = "PENDING";
+        setTimeout(() => {
+          this.submitStatus = "OK";
+        }, 500);
+      }
     },
   },
 };
@@ -241,12 +240,11 @@ export default {
     margin-right: 5px
 
 .client-group
-  display: flex
-  align-items: center
+  height: 80px
 
   input
     margin-left: 20px
-    margin-right: 5px
+    // margin-right: 5px
 
 .submit
   padding: 12px 70px
@@ -267,4 +265,13 @@ export default {
   &:disabled
     background-color: lightgray
     cursor: not-allowed
+
+.error
+  position: relative
+  top: -25px
+
+.submitStatus
+  font-size: 24px
+  display: inline-block
+  margin-left: 20px
 </style>
