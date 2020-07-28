@@ -46,6 +46,7 @@ export default {
 body
   color: #434343
   background-color: #AFDAE8
+  margin-bottom: 50px
 
 #app
   font-family: Calibri, Helvetica, Arial, sans-serif
@@ -66,6 +67,7 @@ main
   flex: 3 0px
 
   padding: 48px 50px
+  margin-bottom: 50px
 
 aside
   order: 2
