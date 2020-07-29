@@ -56,4 +56,21 @@ header
       font-size: 20px
       text-decoration: none
       color: white
+
+@media only screen and (min-width: 600px)
+  .menu li a
+    font-size: 20px
+
+@media only screen and (max-width: 599px)
+  .menu
+    li
+      padding: 10px
+      a
+        font-size: 18px
+      &:first-child
+        margin: 10px auto 0
+  
+  ul
+    flex-direction: column
+
 </style>
