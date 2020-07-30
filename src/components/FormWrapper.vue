@@ -288,4 +288,14 @@ export default {
   display: inline-block
   margin-left: 20px
 
+@media only screen and (max-width: 599px)
+  .form-group
+    flex-wrap: wrap
+    flex-direction: column
+  
+  .client-group
+    height: auto
+  
+  .error
+    top: -75px
 </style>

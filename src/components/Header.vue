@@ -57,9 +57,7 @@ header
       text-decoration: none
       color: white
 
-@media only screen and (min-width: 600px)
-  .menu li a
-    font-size: 20px
+
 
 @media only screen and (max-width: 599px)
   .menu

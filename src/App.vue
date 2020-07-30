@@ -79,4 +79,16 @@ aside
   padding: 50px 10px 15px 50px
 
   border-left: 1px solid lightgray
+
+@media only screen and (max-width: 599px)
+  #app
+    text-align: center
+  
+  .form-group
+    &__label
+      margin-right: 0
+      margin-bottom: 15px
+    
+  aside
+    display: none
 </style>
