@@ -13,9 +13,9 @@
 
 <script>
 import Header from "./components/Header.vue";
-import Sidebar from "./components/Sidebar.vue";
 import InfoBlock from "./components/InfoBlock.vue";
 import FormWrapper from "./components/FormWrapper.vue";
+import Sidebar from "./components/Sidebar.vue";
 
 export default {
   name: "App",
@@ -23,7 +23,7 @@ export default {
     Header,
     Sidebar,
     InfoBlock,
-    FormWrapper,
+    FormWrapper
   },
 };
 </script>
