@@ -8,41 +8,45 @@
 
     <h3>Общие данные</h3>
 
-    <!-- surname check -->
+    <!-- surname -->
     <div class="form-group surname" :class="{ 'form-group__error': $v.name.$error }">
       <label class="form-group__label" for="surname">Фамилия <span class="red">*</span></label>
       <input class="form-group__input" v-model.trim="$v.surname.$model" type="text" />
     </div>
     <div class="error" v-if="!$v.surname.required">Фамилия обязательна</div>
+    <div class="error" v-if="!$v.surname.alphaCyr && !$v.surname.alpha">Фамилия может содержать только буквы</div>
 
-    <!-- name check -->
+    <!-- name -->
     <div class="form-group name" :class="{ 'form-group__error': $v.name.$error }">
       <label class="form-group__label" for="name">Имя <span class="red">*</span></label>
       <input class="form-group__input" v-model.trim="$v.name.$model" type="text" />
     </div>
     <div class="error" v-if="!$v.name.required">Имя обязательно</div>
+    <div class="error" v-if="!$v.name.alphaCyr && !$v.name.alpha">Имя может содержать только буквы</div>
 
-    <!-- patronymic WITHOUT check-->
+    <!-- patronymic -->
     <div class="form-group patronymic">
       <label class="form-group__label" for="patronymic">Отчество</label>
       <input class="form-group__input" type="text" />
     </div>
 
-    <!-- birthday check -->
+    <!-- birthday -->
     <div class="form-group birthday" :class="{ 'form-group__error': $v.birthday.$error }">
       <label class="form-group__label" for="birthday">Дата рождения <span class="red">*</span></label>
       <input class="form-group__input" v-model.trim="$v.birthday.$model" type="text" placeholder="__.__.____" />
     </div>
     <div class="error" v-if="!$v.birthday.required">Дата рождения обязательна</div>
+    <div class="error" v-if="!$v.birthday.numeric">Дата рождения может содержать только цифры</div>
 
-    <!-- phone-number check -->
+    <!-- phone-number -->
     <div class="form-group phone-number" :class="{ 'form-group__error': $v.phoneNumber.$error }">
       <label class="form-group__label" for="phoneNumber">Номер телефона</label>
       <input class="form-group__input" v-model.trim="$v.phoneNumber.$model" type="text" placeholder="+7 (___) ___ - ____" />
     </div>
-    <div class="error" v-if="!$v.phoneNumber.required">Номер должен содержать 11 цифр</div>
+    <div class="error" v-if="!$v.phoneNumber.minLength || !$v.phoneNumber.maxLength">Номер должен содержать 11 цифр</div>
+    <div class="error" v-if="!$v.phoneNumber.numeric">Номер телефона может содержать только цифры</div>
 
-    <!-- sex WITHOUT check -->
+    <!-- sex -->
     <div class="form-group sex">
       <label class="form-group__label" for="sex">Пол</label>
       <div>
@@ -51,15 +55,11 @@
       </div>
     </div>
 
-    <!-- client-group check -->
+    <!-- client-group -->
     <div class="form-group client-group" :class="{ 'form-group__error': $v.clientGroup.$error }">
       <label class="form-group__label" for="client-group">Группа клиентов <span class="red">*</span></label>
       <div class="">
         <!-- TODO: разобраться с проверкой мультиселектора -->
-        <!-- !$v.clientGroup1.required -->
-        <!-- !$v.clientGroup2.required -->
-        <!-- !$v.clientGroup3.required -->
-        <!-- один из них должен сработать, тогда проверка пройдёт -->
         <input name="VIP" type="checkbox" v-model="$v.clientGroup.$model" /> VIP
         <input name="Проблемные" type="checkbox" v-model="$v.clientGroup.$model" /> Проблемные
         <input name="ОМС" type="checkbox" v-model="$v.clientGroup.$model" /> ОМС
@@ -67,7 +67,7 @@
     </div>
     <div class="error" v-if="!$v.clientGroup.required">Обязательно для заполнения</div>
 
-    <!-- doctor WITHOUT check -->
+    <!-- doctor -->
     <div class="form-group doctor">
       <label class="form-group__label" for="doctor">Лечащий врач</label>
       <select>
@@ -77,47 +77,48 @@
       </select>
     </div>
 
-    <!-- sms-check WITHOUT check -->
+    <!-- sms-check -->
     <div class="form-group sms-check">
-      <input name="sms-checkbox" type="checkbox" checked />
+      <input class="form-group__checkbox" type="checkbox" checked />
       <!-- TODO: сделать отступ от галочки -->
       <label class="form-group__label" for="sms-check">Не отправлять СМС</label>
     </div>
 
     <h3>Адрес</h3>
 
-    <!-- index WITHOUT check-->
+    <!-- index -->
     <div class="form-group index">
       <label class="form-group__label" for="index">Индекс</label>
       <input class="form-group__input" type="text" />
     </div>
 
-    <!-- country WITHOUT check-->
+    <!-- country -->
     <div class="form-group country">
       <label class="form-group__label" for="country">Страна</label>
       <input class="form-group__input" type="text" />
     </div>
 
-    <!-- region WITHOUT check-->
+    <!-- region -->
     <div class="form-group region">
       <label class="form-group__label" for="region">Область</label>
       <input class="form-group__input" type="text" />
     </div>
   
-    <!-- town check -->
+    <!-- town -->
     <div class="form-group town" :class="{ 'form-group__error': $v.town.$error }">
       <label class="form-group__label" for="town">Город <span class="red">*</span></label>
       <input class="form-group__input" v-model.trim="$v.town.$model" type="text" />
     </div>
     <div class="error" v-if="!$v.town.required">Город обязателен</div>
+    <div class="error" v-if="!$v.town.alphaCyr && !$v.town.alpha">Город может содержать только буквы</div>
 
-    <!-- street WITHOUT check-->
+    <!-- street -->
     <div class="form-group street">
       <label class="form-group__label" for="street">Область</label>
       <input class="form-group__input" type="text" />
     </div>
 
-    <!-- house WITHOUT check-->
+    <!-- house -->
     <div class="form-group house">
       <label class="form-group__label" for="house">Дом</label>
       <input class="form-group__input" type="text" />
@@ -172,7 +173,7 @@
 </template>
 
 <script>
-import { required, minLength, maxLength } from "vuelidate/lib/validators";
+import { required, numeric, alpha, minLength, maxLength } from "vuelidate/lib/validators";
 
 export default {
   data() {
@@ -191,29 +192,38 @@ export default {
   },
   validations: {
     surname: {
-      required
+      required,
+      alphaCyr: val => /^[а-яё]*$/i.test(val),
+      alpha
     },
     name: {
-      required
+      required,
+      alphaCyr: val => /^[а-яё]*$/i.test(val),
+      alpha
     },
     birthday: {
-      required
+      required,
+      numeric
     },
     phoneNumber: {
       minLength: minLength(11),
-      maxLength: maxLength(11)
+      maxLength: maxLength(11),
+      numeric
     },
     clientGroup: {
       required
     },
     town: {
-      required
+      required,
+      alphaCyr: val => /^[а-яё]*$/i.test(val),
+      alpha
     },
     typeOfDocument: {
       required
     },
     dateOfIssue: {
-      required
+      required,
+      numeric
     }
   },
   methods: {
@@ -238,6 +248,9 @@ export default {
 
   input
     margin-left: 20px
+
+.form-group
+  &__checkbox
     margin-right: 5px
 
 .client-group
@@ -245,7 +258,6 @@ export default {
 
   input
     margin-left: 20px
-    // margin-right: 5px
 
 .submit
   padding: 12px 70px
@@ -275,4 +287,5 @@ export default {
   font-size: 24px
   display: inline-block
   margin-left: 20px
+
 </style>
